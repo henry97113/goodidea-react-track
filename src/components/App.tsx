@@ -1,10 +1,12 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import Header from './Header';
 
-interface AppProps {}
-
-const App = (props: AppProps) => {
-  return <div />;
+const App = props => {
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default App;
