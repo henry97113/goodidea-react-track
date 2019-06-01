@@ -8,27 +8,27 @@ module.exports = merge(common, {
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   devtool: 'inline-sourcemap',
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
+      template: './src/index.html'
+    })
   ],
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         loader: [
           'style-loader', // add inline style to HTML head
           'css-loader', // translates CSS into CommonJS
-          'sass-loader', // compiles Sass to CSS
-        ],
-      },
-    ],
-  },
+          'sass-loader' // compiles Sass to CSS
+        ]
+      }
+    ]
+  }
 });

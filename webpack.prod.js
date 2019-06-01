@@ -12,31 +12,31 @@ module.exports = merge(common, {
   output: {
     filename: '[name].[contentHash].bundle.js',
     chunkFilename: '[name].[contentHash].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   optimization: {
     minimizer: [
       new OptimizeCssAssetsPlugin(),
       new TerserPlugin(),
       new HtmlWebpackPlugin({
-        template: './src/index.html',
-      }),
-    ],
+        template: './src/index.html'
+      })
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].[contentHash].css' }),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin()
   ],
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         loader: [
           MiniCssExtractPlugin.loader, // extracts CSS into separate files instead of style tag in the head
           'css-loader', // translates CSS into CommonJS
-          'sass-loader', // compiles Sass to CSS
-        ],
-      },
-    ],
-  },
+          'sass-loader' // compiles Sass to CSS
+        ]
+      }
+    ]
+  }
 });
