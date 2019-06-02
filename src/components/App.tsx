@@ -5,8 +5,9 @@ import BookList from './BookList';
 const App = props => {
   return (
     <div className="bg-light" style={{ minHeight: '100vh' }}>
-      <div className="container-fluid w-75">
+      <div className="container-fluid" style={{ maxWidth: '60%' }}>
         <Header />
+        <BookList />
       </div>
     </div>
   );
