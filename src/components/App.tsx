@@ -35,8 +35,8 @@ const App = props => {
     fetchBookList();
   }, []);
   return (
-    <div className="bg-light" style={{ minHeight: '100vh' }}>
-      <div className="container-fluid" style={{ maxWidth: '60%' }}>
+    <div className="app bg-light" style={{ minHeight: '100vh' }}>
+      <div className="container-fluid">
         <Header handleInput={handleInput} />
         {list.length === 0 && filtered.length === 0 ? (
           'Loading...'
