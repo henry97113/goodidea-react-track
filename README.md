@@ -1,4 +1,4 @@
-# 好想工作室 - 天瓏書局書單搜尋
+# Q4. [入門] 天瓏書籍搜尋器
 ## Demo page
 [https://henry97113.github.io/goodidea-react-track/Q4/](https://henry97113.github.io/goodidea-react-track/Q4/)
 
@@ -8,6 +8,6 @@
 [Node 10 以上版本](https://nodejs.org)
 
 ## 基本指令
-開發用 localhost: `yarn dev`
+open dev-server: `yarn dev`
 <br />
-production：`yarn build`
+build production files：`yarn build`
