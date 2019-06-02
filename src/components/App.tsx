@@ -1,8 +1,8 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import Header from './Header';
 import BookList from './BookList';
 import { List } from 'models/list';
-import Book from './Book';
 
 const App = props => {
   const [list, setList] = React.useState<List[]>([]);
@@ -13,6 +13,7 @@ const App = props => {
       if (res.ok) {
         const data = await res.json();
         setList(data.list);
+        setFiltered(data.list);
       } else {
         throw Error('Fail to fetch data.');
       }
@@ -20,30 +21,28 @@ const App = props => {
       console.warn(err);
     }
   };
+  const delaySearch = _.debounce((list: List[]) => {
+    setFiltered(list);
+  }, 500);
   const handleInput = e => {
-    const searchText = e.target.value.trim().toLowerCase();
+    const text = e.target.value.toLowerCase().trim();
     const filtered = list.filter(item => {
-      return item.name.toLowerCase().includes(searchText);
+      return item.name.toLowerCase().includes(text);
     });
-    setFiltered(filtered);
+    delaySearch(filtered);
   };
   React.useEffect(() => {
     fetchBookList();
   }, []);
-  React.useEffect(() => {
-    if (filtered.length === 0 && list.length !== 0) {
-      setFiltered(list);
-    }
-  });
   return (
     <div className="bg-light" style={{ minHeight: '100vh' }}>
       <div className="container-fluid" style={{ maxWidth: '60%' }}>
         <Header handleInput={handleInput} />
-        <BookList
-          render={() => {
-            return filtered.map(item => <Book key={item.ISBN} book={item} />);
-          }}
-        />
+        {list.length === 0 && filtered.length === 0 ? (
+          'Loading...'
+        ) : (
+          <BookList list={filtered} />
+        )}
       </div>
     </div>
   );

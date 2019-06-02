@@ -1,14 +1,23 @@
 import * as React from 'react';
+import { List } from 'models/list';
+import Book from './Book';
 
 interface BookListProps {
-  render: () => JSX.Element[];
+  list: List[];
 }
 
 const BookList = (props: BookListProps) => {
-  const { render } = props;
   return (
     <div className="book-list">
-      <div className="card-columns">{render()}</div>
+      {props.list.length === 0 ? (
+        'No match found.'
+      ) : (
+        <div className="card-columns">
+          {props.list.map(book => (
+            <Book key={book.ISBN} book={book} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
