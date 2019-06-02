@@ -27,7 +27,7 @@ const App = props => {
   const handleInput = e => {
     const text = e.target.value.toLowerCase().trim();
     const filtered = list.filter(item => {
-      return item.name.toLowerCase().includes(text);
+      return item.name.toLowerCase().includes(text) || item.ISBN.includes(text);
     });
     delaySearch(filtered);
   };

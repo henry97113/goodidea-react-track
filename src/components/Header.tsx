@@ -15,7 +15,7 @@ const Header = (props: HeaderProps) => {
           type="text"
           className="form-control"
           onInput={e => props.handleInput(e)}
-          placeholder="輸入書名"
+          placeholder="輸入書名或 ISBN"
           aria-label="enter book title"
           aria-describedby="book search"
         />
