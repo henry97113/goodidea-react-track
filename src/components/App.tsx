@@ -6,13 +6,13 @@ import Book from './Book';
 
 const App = props => {
   const [list, setList] = React.useState<List[]>([]);
+  const [filtered, setFiltered] = React.useState<List[]>([]);
   const fetchBookList = async () => {
     try {
       const res = await fetch('https://bookshelf.goodideas-studio.com/api');
       if (res.ok) {
         const data = await res.json();
-        const list = data.list;
-        setList(list);
+        setList(data.list);
       } else {
         throw Error('Fail to fetch data.');
       }
@@ -20,16 +20,28 @@ const App = props => {
       console.warn(err);
     }
   };
+  const handleInput = e => {
+    const searchText = e.target.value.trim().toLowerCase();
+    const filtered = list.filter(item => {
+      return item.name.toLowerCase().includes(searchText);
+    });
+    setFiltered(filtered);
+  };
   React.useEffect(() => {
     fetchBookList();
-  }, [list]);
+  }, []);
+  React.useEffect(() => {
+    if (filtered.length === 0 && list.length !== 0) {
+      setFiltered(list);
+    }
+  });
   return (
     <div className="bg-light" style={{ minHeight: '100vh' }}>
       <div className="container-fluid" style={{ maxWidth: '60%' }}>
-        <Header />
+        <Header handleInput={handleInput} />
         <BookList
           render={() => {
-            return list.map(item => <Book key={item.ISBN} book={item} />);
+            return filtered.map(item => <Book key={item.ISBN} book={item} />);
           }}
         />
       </div>

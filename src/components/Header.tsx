@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-const Header = props => {
+interface HeaderProps {
+  handleInput: (e) => void;
+}
+
+const Header = (props: HeaderProps) => {
   return (
     <div className="header">
       <h3 className="py-3 text-center text-primary">
@@ -10,6 +14,7 @@ const Header = props => {
         <input
           type="text"
           className="form-control"
+          onInput={e => props.handleInput(e)}
           placeholder="輸入書名"
           aria-label="enter book title"
           aria-describedby="book search"
